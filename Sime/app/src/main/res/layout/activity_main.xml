@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@color/colorPrimary">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="320dp"
+                android:layout_height="130dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="63dp"
+                app:layout_constraintBottom_toTopOf="@+id/tvIn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/logo" />
+
+            <Button
+                android:id="@+id/btIFrequencia"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:background="@drawable/background_login"
+                android:text="Iniciar Frequencia"
+                android:textColor="#000"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btISyncData" />
+
+            <Button
+                android:id="@+id/btISyncData"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/background_login"
+                android:text="Sincronizar"
+                android:textColor="#000"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/btIFrequencia"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvNmEscola" />
+
+            <TextView
+                android:id="@+id/tvIn"
+                style="@android:style/Widget.DeviceDefault.TextView.SpinnerItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:text="Instituição"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/tvNmEscola"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+            <TextView
+                android:id="@+id/tvNmEscola"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginBottom="185dp"
+                android:text="Nome Da Escola"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/btISyncData"
+                app:layout_constraintStart_toStartOf="@+id/tvIn"
+                app:layout_constraintTop_toBottomOf="@+id/tvIn" />
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+</LinearLayout>
