@@ -1,8 +1,9 @@
-package com.packetsoftware.sime.model;
+package com.packetsoftware.sime.controller;
 
-public class Sime {
+public class SimeLogin {
     private String status;
     private String menssage;
+    private Usuario usuario;
 
     public String getStatus() {
         return status;
@@ -18,5 +19,13 @@ public class Sime {
 
     public void setMenssage(String menssage) {
         this.menssage = menssage;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

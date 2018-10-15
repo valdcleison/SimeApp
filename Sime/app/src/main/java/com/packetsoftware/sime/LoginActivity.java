@@ -5,10 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.Toast;
 
-import com.packetsoftware.sime.api.SimeService;
-import com.packetsoftware.sime.model.Sime;
+import com.packetsoftware.sime.api.DataService;
+import com.packetsoftware.sime.controller.SimeLogin;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,25 +18,35 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
-    Button bt;
+    EditText etusuario, etsenha;
     Button btLogin;
-    TextView tv;
     private Retrofit retrofit;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        inicializaComponentes();
 
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://www.simeescola.com.br/ws/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
+
+
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent();
+                String usuario = etusuario.getText().toString();
+                String senha = etsenha.getText().toString();
 
+                if(usuario.isEmpty() || senha.isEmpty()){
+                    Toast.makeText(LoginActivity.this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
+                } else{
+                    realizarLogin(usuario, senha);
+                }
             }
         });
 
@@ -43,22 +54,43 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void inicializaComponentes(){
+        etusuario = (EditText)findViewById(R.id.etUsuario);
+        etsenha = (EditText)findViewById(R.id.etSenha);
+        btLogin = (Button) findViewById(R.id.btLogin);
+    }
 
-    private void recuperaSime(){
-        SimeService simeService = retrofit.create(SimeService.class);
-        Call<Sime> call = simeService.recuperaSime("2.0");
-        call.enqueue(new Callback<Sime>() {
+
+
+    private void realizarLogin(String user, final String senha){
+
+        DataService simeService = retrofit.create(DataService.class);
+
+        Call<SimeLogin> call = simeService.realizarLogin("1.0", user, senha);
+        call.enqueue(new Callback<SimeLogin>() {
             @Override
-            public void onResponse(Call<Sime> call, Response<Sime> response) {
+            public void onResponse(Call<SimeLogin> call, Response<SimeLogin> response) {
                 if(response.isSuccessful()){
-                    Sime sime = response.body();
-                    tv.setText("Status: "+ sime.getStatus()+ " Mensagen: " + sime.getMenssage());
+
+                    SimeLogin sime = response.body();
+
+                    if(sime.getStatus().equals("failed")){
+                        Toast.makeText(LoginActivity.this, sime.getMenssage(), Toast.LENGTH_SHORT).show();
+                    }else{
+
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("idusuario", String.valueOf(sime.getUsuario().getIdusuario()));
+                        intent.putExtra("nomeusuario", sime.getUsuario().getUsuario());
+                        intent.putExtra("senhausuario", senha);
+                        startActivity(intent);
+                    }
+
                 }
             }
 
             @Override
-            public void onFailure(Call<Sime> call, Throwable t) {
-
+            public void onFailure(Call<SimeLogin> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, t.toString(), Toast.LENGTH_LONG).show();
             }
         });
     }
