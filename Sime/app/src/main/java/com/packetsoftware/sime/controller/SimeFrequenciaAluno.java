@@ -1,9 +1,11 @@
 package com.packetsoftware.sime.controller;
 
-public class SimeFrequencia {
+import java.util.List;
+
+public class SimeFrequenciaAluno {
     private String status;
     private String menssage;
-    private Frequencia frequencia;
+    private Frequenciaaluno frequenciaaluno;
 
     public String getStatus() {
         return status;
@@ -21,11 +23,11 @@ public class SimeFrequencia {
         this.menssage = menssage;
     }
 
-    public Frequencia getFrequencia() {
-        return frequencia;
+    public Frequenciaaluno getFrequenciaaluno() {
+        return frequenciaaluno;
     }
 
-    public void setFrequencia(Frequencia frequencia) {
-        this.frequencia = frequencia;
+    public void setFrequenciaaluno(Frequenciaaluno frequenciaaluno) {
+        this.frequenciaaluno = frequenciaaluno;
     }
 }

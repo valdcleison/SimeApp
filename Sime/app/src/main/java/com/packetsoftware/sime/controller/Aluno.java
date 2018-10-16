@@ -1,6 +1,6 @@
 package com.packetsoftware.sime.controller;
 
-class Aluno {
+public class Aluno {
     private String idaluno;
     private Pessoa pessoa;
 
@@ -19,4 +19,6 @@ class Aluno {
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
+
+
 }

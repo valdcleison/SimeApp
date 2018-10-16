@@ -3,9 +3,9 @@ package com.packetsoftware.sime.api;
 
 import com.packetsoftware.sime.controller.SimeEscola;
 import com.packetsoftware.sime.controller.SimeFrequencia;
+import com.packetsoftware.sime.controller.SimeFrequenciaAluno;
 import com.packetsoftware.sime.controller.SimeLogin;
 
-import java.lang.reflect.Array;
 import java.util.List;
 
 import retrofit2.Call;
@@ -27,7 +27,9 @@ public interface DataService {
     Call sinc(@Path("versao") String versao);
 
     @GET("/ws/{versao}/portal/{usuario}/{senha}/dados-frequencia-aluno/")
-    Call<List<SimeFrequencia>> buscarDadosFrequencia(@Path("versao") String versao, @Path("usuario") String usuario, @Path("senha") String senha);
+    Call<List<SimeFrequenciaAluno>> buscarDadosFrequenciaAluno(@Path("versao") String versao, @Path("usuario") String usuario, @Path("senha") String senha);
 
+    @GET("/ws/{versao}/portal/{usuario}/{senha}/dados-frequencia/")
+    Call<SimeFrequencia> buscarDadosFrequencia(@Path("versao") String versao, @Path("usuario") String usuario, @Path("senha") String senha);
 
 }

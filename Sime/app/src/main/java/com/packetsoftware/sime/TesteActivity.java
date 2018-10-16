@@ -8,7 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.packetsoftware.sime.Dao.FrequenciaDao;
 import com.packetsoftware.sime.api.DataService;
+import com.packetsoftware.sime.controller.Frequencia;
 
 import java.lang.reflect.Array;
 import java.util.List;
@@ -37,38 +39,13 @@ public class TesteActivity extends AppCompatActivity {
             idusuario = extras.getString("id");
 
         }
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl("http://www.simeescola.com.br/ws/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        recuperarDadosEscola(18, "admin123456", "admin123456");
-
+        FrequenciaDao frequenciaDao = new FrequenciaDao(getApplicationContext());
+        for(Frequencia f: frequenciaDao.listar()){
+            Log.d("ffffff", "Fre " + f.getDtfrequencia());
+        }
     }
 
 
-    private void recuperarDadosEscola(int idusuario, String usuario, String senha){
-        DataService simeService = retrofit.create(DataService.class);
-
-        Call<List<Array>> call = simeService.sinc("1.0");
-        call.enqueue(new Callback<List<Array>>() {
-            @Override
-            public void onResponse(Call<List<Array>> call, Response<List<Array>> response) {
-                if(response.isSuccessful()){
-
-                        Log.d("loginn", "onResponse: "+response.body().toString());
-                        Toast.makeText(TesteActivity.this, response.body().toString(), Toast.LENGTH_LONG).show();
 
 
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Array>> call, Throwable t) {
-                Log.d("loginn", "onFailure: "+t.toString());
-                Toast.makeText(TesteActivity.this, t.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
 }
