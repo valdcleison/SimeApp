@@ -48,4 +48,8 @@ public class PessoaDao {
     public List<Pessoa> listar(){
         return new ArrayList<>();
     }
+
+    public void limpabanco(){
+        insere.delete("pessoa", null,null);
+    }
 }

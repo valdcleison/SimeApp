@@ -33,4 +33,7 @@ public class MatriculaDao {
 
         return false;
     }
+    public void limpabanco(){
+        insere.delete("matricula", null,null);
+    }
 }

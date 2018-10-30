@@ -1,10 +1,13 @@
-package com.packetsoftware.sime;
+package com.packetsoftware.sime.activity;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,13 +20,14 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.packetsoftware.sime.R;
 
 import java.io.IOException;
 
 public class FrequenciaActivity extends AppCompatActivity {
 
     SurfaceView cameraPreview;
-    TextView txtResult;
+    TextView txtResult, txtStatus;
     BarcodeDetector barcodeDetector;
     CameraSource cameraSource;
     final int RequestCameraPermissionID = 1001;
@@ -55,7 +59,8 @@ public class FrequenciaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_frequencia);
 
         cameraPreview = (SurfaceView) findViewById(R.id.camera);
-        txtResult = (TextView) findViewById(R.id.tvResultado);
+        txtResult = findViewById(R.id.tvResultado);
+        txtStatus = findViewById(R.id.tvStatus);
 
         barcodeDetector = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.QR_CODE)
@@ -105,12 +110,16 @@ public class FrequenciaActivity extends AppCompatActivity {
                 if(qrcodes.size() != 0)
                 {
                     txtResult.post(new Runnable() {
+                        @RequiresApi(api = Build.VERSION_CODES.O)
                         @Override
                         public void run() {
+                            String valor = qrcodes.valueAt(0).displayValue;
                             //Create vibrate
                             Vibrator vibrator = (Vibrator)getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
                             vibrator.vibrate(1000);
                             txtResult.setText(qrcodes.valueAt(0).displayValue);
+                            txtStatus.setBackgroundColor(Color.GREEN);
+                            txtStatus.setText("Presente");
                         }
                     });
                 }

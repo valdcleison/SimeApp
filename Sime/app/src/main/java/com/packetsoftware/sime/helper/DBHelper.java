@@ -18,17 +18,17 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         String CREATE_TABLE_FREQUENCIA = "CREATE TABLE IF NOT EXISTS frequencia (" +
-                "idfrequencia INTEGER PRIMARY KEY," +
+                "idfrequencia INTEGER ," +
                 "qtalunosausentes INTEGER," +
                 "qtalunospresentes INTEGER," +
                 "dtfrequencia DATE," +
                 "hrinicio DATETIME," +
-                "hrtermino DATETIME," +
-                "status INTEGER)";
+                "hrtermino DATETIME)";
 
         String CREATE_TABLE_FREQUENCIAALUNO = "CREATE TABLE IF NOT EXISTS frequenciaaluno (" +
-                "idfrequenciaaluno INTEGER PRIMARY KEY," +
+                "idfrequenciaaluno INTEGER ," +
                 "data DATE," +
                 "hrentrada DATETIME," +
                 "hrsaida DATETIME," +
@@ -36,21 +36,22 @@ public class DBHelper extends SQLiteOpenHelper {
                 "frequencia_idfrequencia INTEGER)";
 
         String CREATE_TABLE_MATRICULA = "CREATE TABLE IF NOT EXISTS matricula (" +
-                "idmatricula INTEGER PRIMARY KEY," +
+                "idmatricula INTEGER ," +
                 "aluno_idaluno INTEGER," +
                 "numeromatricula VARCHAR(45))";
 
         String CREATE_TABLE_ALUNO = "CREATE TABLE IF NOT EXISTS aluno (" +
-                "idaluno INTEGER PRIMARY KEY," +
+                "idaluno INTEGER ," +
                 "pessoa_idpessoa INTEGER," +
                 "numeromatricula VARCHAR(45))";
 
-        String CREATE_TABLE_PESSOA = "CREATE TABLE IF NOT EXISTS aluno (" +
-                "idpessoa INTEGER PRIMARY KEY," +
+        String CREATE_TABLE_PESSOA = "CREATE TABLE IF NOT EXISTS pessoa (" +
+                "idpessoa INTEGER ," +
                 "nomepessoa VARCHAR(150)," +
                 "cpfpessoa VARCHAR(11))";
 
         try{
+
             db.execSQL(CREATE_TABLE_FREQUENCIA);
             db.execSQL(CREATE_TABLE_FREQUENCIAALUNO);
             db.execSQL(CREATE_TABLE_MATRICULA);

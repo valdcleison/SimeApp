@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlunoDao {
+
     private SQLiteDatabase insere;
     private SQLiteDatabase ler;
 
@@ -48,5 +49,9 @@ public class AlunoDao {
 
     public List<Aluno> listar(){
         return new ArrayList<>();
+    }
+
+    public void limpabanco(){
+        insere.delete("aluno", null,null);
     }
 }

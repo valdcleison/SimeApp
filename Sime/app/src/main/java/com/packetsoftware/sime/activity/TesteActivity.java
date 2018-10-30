@@ -1,4 +1,4 @@
-package com.packetsoftware.sime;
+package com.packetsoftware.sime.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.packetsoftware.sime.Dao.FrequenciaDao;
+import com.packetsoftware.sime.R;
 import com.packetsoftware.sime.api.DataService;
 import com.packetsoftware.sime.controller.Frequencia;
 

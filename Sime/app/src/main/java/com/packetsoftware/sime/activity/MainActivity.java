@@ -1,6 +1,5 @@
-package com.packetsoftware.sime;
+package com.packetsoftware.sime.activity;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,8 +14,9 @@ import com.packetsoftware.sime.Dao.FrequenciaAlunoDao;
 import com.packetsoftware.sime.Dao.FrequenciaDao;
 import com.packetsoftware.sime.Dao.MatriculaDao;
 import com.packetsoftware.sime.Dao.PessoaDao;
+import com.packetsoftware.sime.R;
 import com.packetsoftware.sime.api.DataService;
-import com.packetsoftware.sime.controller.Matricula;
+import com.packetsoftware.sime.controller.Aluno;
 import com.packetsoftware.sime.controller.SimeEscola;
 import com.packetsoftware.sime.controller.SimeFrequencia;
 import com.packetsoftware.sime.controller.SimeFrequenciaAluno;
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     String nomeusuario;
     String senhausuario;
     int idescola;
+    boolean ok = false;
 
     private Retrofit retrofit;
 
@@ -75,11 +76,18 @@ public class MainActivity extends AppCompatActivity {
         btSinc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+
+
                 recuperarDadosFrequencia(nomeusuario,senhausuario);
                 recuperarDadosFrequenciaAluno(idusuario,nomeusuario,senhausuario);
-                Intent i = new Intent(MainActivity.this, TesteActivity.class);
 
-                startActivity(i);
+
+
+                FrequenciaAlunoDao frAlunoDao = new FrequenciaAlunoDao(getApplicationContext());
+                frAlunoDao.listarPorMatricula("123");
+
 
 
             }
@@ -88,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         btInFrequencia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                recuperarDadosFrequencia(nomeusuario,senhausuario);
                 Intent i = new Intent(MainActivity.this, FrequenciaActivity.class);
                 i.putExtra("nomeusuario", nomeusuario);
                 i.putExtra("senhausuario", senhausuario);
@@ -111,9 +120,12 @@ public class MainActivity extends AppCompatActivity {
 
 
                 if(response.isSuccessful()){
+                    Toast.makeText(getApplicationContext(), "Fazendo ligação...", Toast.LENGTH_LONG).show();
                     SimeFrequencia simeFrequencia = response.body();
                     FrequenciaDao frequenciaDao = new FrequenciaDao(getApplicationContext());
-                    frequenciaDao.salvar(simeFrequencia.getFrequencia());
+                    if(frequenciaDao.listarHoje() != null){
+                        frequenciaDao.salvar(simeFrequencia.getFrequencia());
+                    }
                 }
             }
 
@@ -137,8 +149,11 @@ public class MainActivity extends AppCompatActivity {
 
 
                 if(response.isSuccessful()){
+                    Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_LONG).show();
                     List<SimeFrequenciaAluno> simeFrequencia = response.body();
                     for(SimeFrequenciaAluno sF: simeFrequencia){
+
+
 
                         PessoaDao pessoaDao = new PessoaDao(getApplicationContext());
                         pessoaDao.salvar(sF.getFrequenciaaluno().getMatricula().getAluno().getPessoa());
@@ -152,9 +167,13 @@ public class MainActivity extends AppCompatActivity {
                         FrequenciaAlunoDao frequenciaAlunoDao = new FrequenciaAlunoDao(getApplicationContext());
                         frequenciaAlunoDao.salvar(sF.getFrequenciaaluno());
 
-                        Toast.makeText(MainActivity.this, sF.getFrequenciaaluno().getIdfrequenciaaluno(), Toast.LENGTH_LONG).show();
+
 
                     }
+
+                    ok = true;
+
+
                 }
             }
 

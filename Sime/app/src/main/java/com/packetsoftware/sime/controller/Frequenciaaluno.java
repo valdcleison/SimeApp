@@ -32,7 +32,7 @@ public class Frequenciaaluno {
         this.hrentrada = hrentrada;
     }
 
-        public Matricula getMatricula() {
+    public Matricula getMatricula() {
         return matricula;
     }
 
