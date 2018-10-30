@@ -56,6 +56,7 @@ public class FrequenciaAlunoDao {
     public Frequenciaaluno listarPorMatricula(String numeroMatricula){
 
 
+
         String[] values = new String[]{};
         //Cursor cursor = ler.rawQuery("SELECT * FROM frequenciaaluno", null);
         Cursor cursor = ler.rawQuery("SELECT fa.*, m.*, a.pessoa_idpessoa,  p.nomepessoa FROM frequenciaaluno fa " +
