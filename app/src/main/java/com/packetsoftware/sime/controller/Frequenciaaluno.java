@@ -1,5 +1,9 @@
 package com.packetsoftware.sime.controller;
 
+import android.content.Context;
+
+import com.packetsoftware.sime.Dao.FrequenciaAlunoDao;
+
 public class Frequenciaaluno {
     private String idfrequenciaaluno;
     private String data;
@@ -32,7 +36,7 @@ public class Frequenciaaluno {
         this.hrentrada = hrentrada;
     }
 
-        public Matricula getMatricula() {
+    public Matricula getMatricula() {
         return matricula;
     }
 
@@ -46,5 +50,10 @@ public class Frequenciaaluno {
 
     public void setFrequencia(Frequencia frequencia) {
         this.frequencia = frequencia;
+    }
+
+    public boolean deletar(Context context){
+        FrequenciaAlunoDao frequenciaAlunoDao = new FrequenciaAlunoDao(context);
+        return frequenciaAlunoDao.deletar(this);
     }
 }

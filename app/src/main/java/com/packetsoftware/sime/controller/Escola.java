@@ -4,7 +4,7 @@ public class Escola {
     private String idescola;
     private String nomeescola;
     private String cnpj;
-    private String status;
+    private String nomegestor;
     private Contato contato;
     private AnoLetivo anoLetivo;
     private Endereco endereco;
@@ -33,12 +33,12 @@ public class Escola {
         this.cnpj = cnpj;
     }
 
-    public String getStatus() {
-        return status;
+    public String getNomegestor() {
+        return nomegestor;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setNomegestor(String nomegestor) {
+        this.nomegestor = nomegestor;
     }
 
     public Contato getContato() {

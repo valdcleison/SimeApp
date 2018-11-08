@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class AnoLetivo {
     private String idanoletivo;
-    private int anoletivo;
-    private Date dtinicio;
+    private String anoletivo;
+    private String dtinicio;
 
     public String getIdanoletivo() {
         return idanoletivo;
@@ -15,19 +15,19 @@ public class AnoLetivo {
         this.idanoletivo = idanoletivo;
     }
 
-    public int getAnoletivo() {
+    public String getAnoletivo() {
         return anoletivo;
     }
 
-    public void setAnoletivo(int anoletivo) {
+    public void setAnoletivo(String anoletivo) {
         this.anoletivo = anoletivo;
     }
 
-    public Date getDtinicio() {
+    public String getDtinicio() {
         return dtinicio;
     }
 
-    public void setDtinicio(Date dtinicio) {
+    public void setDtinicio(String dtinicio) {
         this.dtinicio = dtinicio;
     }
 }
