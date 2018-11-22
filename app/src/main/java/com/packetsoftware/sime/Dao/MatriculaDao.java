@@ -32,7 +32,6 @@ public class MatriculaDao {
         try {
             insere.insert("matricula", null, cvMatricula );
         }catch (Exception e){
-            Log.d("simeapp", "salvar: "+ e.getMessage());
             return false;
         }
 
@@ -42,15 +41,14 @@ public class MatriculaDao {
     public Matricula listarPorMatricula(String numeroMatricula){
         String [] values = {numeroMatricula};
         String [] campos = new String[]{"idmatricula", "aluno_idaluno","numeromatricula"};
-        //Cursor cursor = ler.query("frequenciaaluno", campos,null, null, null, null, null);
-        Cursor cursor = ler.query("matricula", campos,null, null, null, null, null);
+
+        Cursor cursor = ler.query("matricula", campos," numeromatricula LIKE ? ", values, null, null, null);
 
         Matricula matricula;
 
         if(cursor != null){
 
             if(cursor.getCount() <= 0){
-                Toast.makeText(contexto, "Sem Frequência registrada", Toast.LENGTH_SHORT).show();
                 return null;
             }
             cursor.moveToFirst();

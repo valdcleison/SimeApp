@@ -37,7 +37,6 @@ public class AlunoDao {
         try {
             insere.insert("aluno", null, cvAluno );
         }catch (Exception e){
-            Log.d("simeapp", "salvar: "+ e.getMessage());
             return false;
         }
 

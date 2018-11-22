@@ -35,7 +35,7 @@ public class PessoaDao {
         try {
             insere.insert("pessoa", null, cvPess );
         }catch (Exception e){
-            Log.d("simeapp", "salvar: "+ e.getMessage());
+
             return false;
         }
 
@@ -65,7 +65,6 @@ public class PessoaDao {
         if(cursor != null){
 
             if(cursor.getCount() <= 0){
-                Toast.makeText(contexto, "Sem Frequência registrada", Toast.LENGTH_SHORT).show();
                 return null;
             }
             cursor.moveToFirst();
@@ -76,7 +75,6 @@ public class PessoaDao {
             pessoa.setCpfpessoa(cursor.getString(2));
             return pessoa;
         }else{
-            Toast.makeText(contexto, "Cursor Vazio",Toast.LENGTH_LONG).show();
             return  null;
         }
     }

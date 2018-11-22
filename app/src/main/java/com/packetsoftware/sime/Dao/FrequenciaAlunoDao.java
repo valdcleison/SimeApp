@@ -37,16 +37,15 @@ public class FrequenciaAlunoDao {
         ContentValues cvFrequenciaAluno = new ContentValues();
         cvFrequenciaAluno.put("idfrequenciaaluno", frequenciaaluno.getIdfrequenciaaluno());
         cvFrequenciaAluno.put("data", frequenciaaluno.getData());
-        cvFrequenciaAluno.put("hrentrada", frequenciaaluno.getHrentrada());
         cvFrequenciaAluno.put("matricula_idmatricula", frequenciaaluno.getMatricula().getIdmatricula());
         cvFrequenciaAluno.put("frequencia_idfrequencia", frequenciaaluno.getFrequencia().getIdfrequencia());
 
 
         try {
-            long a =  insere.insert("frequenciaaluno", null, cvFrequenciaAluno );
-            Log.d("simeapp", "salvar ID: "+ a);
+            insere.insert("frequenciaaluno", null, cvFrequenciaAluno );
+
         }catch (Exception e){
-            Log.d("simeapp", "salvar: "+ e.getMessage());
+
             return false;
         }
 
@@ -57,7 +56,6 @@ public class FrequenciaAlunoDao {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String data = simpleDateFormat.format(calendar.getTime());
-        Log.d("simeapp", "editar: "+data);
 
         ContentValues cvFrequencia = new ContentValues();
         cvFrequencia.put("hrentrada",  data);
@@ -131,6 +129,9 @@ public class FrequenciaAlunoDao {
 
     public void limpabanco(){
         insere.delete("frequenciaaluno", null,null);
+        insere.delete("matricula", null, null);
+        insere.delete("aluno", null, null);
+        insere.delete("pessoa", null, null);
     }
 
 }

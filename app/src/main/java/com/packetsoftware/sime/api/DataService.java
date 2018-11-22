@@ -2,10 +2,10 @@ package com.packetsoftware.sime.api;
 
 
 import com.packetsoftware.sime.controller.Sime;
-import com.packetsoftware.sime.controller_service.SimeEscola;
-import com.packetsoftware.sime.controller_service.SimeFrequencia;
-import com.packetsoftware.sime.controller_service.SimeFrequenciaAluno;
-import com.packetsoftware.sime.controller_service.SimeLogin;
+import com.packetsoftware.sime.controller.SimeEscola;
+import com.packetsoftware.sime.controller.SimeFrequencia;
+import com.packetsoftware.sime.controller.SimeFrequenciaAluno;
+import com.packetsoftware.sime.controller.SimeLogin;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public interface DataService {
     Call<SimeLogin> realizarLogin(@Path("versao") String versao, @Path("usuario") String usuario, @Path("senha") String senha);
 
     @GET("/ws/{versao}/portal/{usuario}/{senha}/dados-escola/")
-    Call<SimeEscola> buscarPorIdUsuario(@Path("versao") String versao,  @Path("usuario") String usuario, @Path("senha") String senha);
+    Call<SimeEscola> buscarPorUsuario(@Path("versao") String versao, @Path("usuario") String usuario, @Path("senha") String senha);
 
     @GET("/ws/{versao}/portal/{usuario}/{senha}/sincdata/{idfrequenciaaluno}/{hrentrada}/")
     Call<Sime> sinca(@Path("versao") String versao, @Path("usuario") String usuario, @Path("senha") String senha, @Path("idfrequenciaaluno") String idAluno, @Path("hrentrada") String hrentrada);

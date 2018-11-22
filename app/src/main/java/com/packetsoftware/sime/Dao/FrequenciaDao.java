@@ -33,14 +33,14 @@ public class FrequenciaDao {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String data = simpleDateFormat.format(calendar.getTime());
 
-        Log.d("simeapp", "salvar data: " + data);
 
         ContentValues cvFrequencia = new ContentValues();
         cvFrequencia.put("idfrequencia", frequencia.getIdfrequencia());
-        cvFrequencia.put("qtalunospresentes", frequencia.getQtalunospresentes());
-        cvFrequencia.put("qtalunosausentes", frequencia.getQtalunosausentes());
+        cvFrequencia.put("qtalunosausentes", frequencia.getQtalunospresentes());
+        cvFrequencia.put("qtalunospresentes", frequencia.getQtalunosausentes());
         cvFrequencia.put("dtfrequencia", frequencia.getDtfrequencia());
         cvFrequencia.put("hrinicio", data);
+
 
         try {
             insere.insert("frequencia", null, cvFrequencia );
@@ -57,7 +57,7 @@ public class FrequenciaDao {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String data = simpleDateFormat.format(calendar.getTime());
-        Log.d("simeapp", "editarFim: "+data);
+
 
         ContentValues cvFrequencia = new ContentValues();
         cvFrequencia.put("hrtermino", data);
@@ -110,11 +110,11 @@ public class FrequenciaDao {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String data = simpleDateFormat.format(calendar.getTime());
-        Toast.makeText(contexto, data, Toast.LENGTH_SHORT).show();
+
         String[] values = new String[]{data};
 
         String [] campos = new String[]{"idfrequencia", "qtalunosausentes", "qtalunospresentes", "dtfrequencia", "hrinicio", "hrtermino"};
-        Cursor cursor = ler.query("frequencia ", campos,"dtfrequencia = ?", values, null, null, null);
+        Cursor cursor = ler.query("frequencia", campos,"dtfrequencia = ?", values, null, null, null);
         Frequencia frequencia;
 
         if(cursor != null){
